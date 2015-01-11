@@ -2,6 +2,8 @@ define ['jQuery', 'phaser'], ($, Phaser) ->
 	$( ->
 		PLATFORM_SPEED = 150
 
+		NUM_PLATFORMS = 3
+
 		PLAYER_WIDTH = 23
 		PLAYER_X_SPEED = PLATFORM_SPEED
 		PLAYER_Y_SPEED = 3*PLATFORM_SPEED
@@ -9,14 +11,14 @@ define ['jQuery', 'phaser'], ($, Phaser) ->
 		randomBetween = (start, end) -> Math.random() * (end - start) + start
 
 		class Row
-			constructor: (platforms) ->
-				@leftSide = @createPlatform(platforms)
-				@rightSide = @createPlatform(platforms)
+			constructor: (platforms, y) ->
+				@leftSide = @createPlatform(platforms, y)
+				@rightSide = @createPlatform(platforms, y)
 
 				@generateGap()
 
-			createPlatform: (platforms) ->
-				platform = platforms.create(0, game.world.height, 'platform')
+			createPlatform: (platforms, y) ->
+				platform = platforms.create(0, y, 'platform')
 				platform.body.immovable = true
 				platform.body.velocity.y = -1 * PLATFORM_SPEED
 				platform
@@ -55,6 +57,7 @@ define ['jQuery', 'phaser'], ($, Phaser) ->
 			preload: ->
 				game.load.image('player_gray', 'web/img/player_gray.png')
 				game.load.image('platform', 'web/img/platform.png')
+				true
 
 			create: ->
 				game.stage.backgroundColor = 0xFFF0A5
@@ -65,16 +68,20 @@ define ['jQuery', 'phaser'], ($, Phaser) ->
 				@platforms = game.add.group()
 				@platforms.enableBody = true
 
-				@ground = new Row(@platforms)
+				@rows = for num in [1..NUM_PLATFORMS]
+					new Row(@platforms, (game.world.height / NUM_PLATFORMS) * num)
 
 				@cursors = game.input.keyboard.createCursorKeys()
+				true
 
 			update: ->
 				game.physics.arcade.collide(@player.sprite, @platforms)
 
 				@player.handleInput(@cursors)
 
-				@ground.wrap()
+				row.wrap() for row in @rows
+
+				true
 
 			# Render
 
