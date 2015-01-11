@@ -22,7 +22,7 @@ define ['jQuery', 'phaser'], ($, Phaser) ->
 				platform
 
 			generateGap: ->
-				gapWidth = randomBetween(PLAYER_WIDTH, PLAYER_WIDTH * 5)
+				gapWidth = randomBetween(PLAYER_WIDTH * 2, PLAYER_WIDTH * 6)
 				gapStart = randomBetween(PLAYER_WIDTH, game.world.width - gapWidth - PLAYER_WIDTH)
 
 				@leftSide.width = gapStart
