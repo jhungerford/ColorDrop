@@ -16,5 +16,9 @@ Program arguments: server colordrop.yml
 ```
 * Run ColorDrop
 
+Execute 'grunt watch' to auto-compile coffeescript sources
+
+Visit localhost:8080 to see the application
+
 ## License
 Apache 2.0

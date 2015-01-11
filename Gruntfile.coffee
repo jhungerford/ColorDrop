@@ -11,6 +11,11 @@ module.exports = (grunt) ->
 				dest: 'target/classes/web/js/'
 				ext: '.js'
 
+		watch:
+			files: 'src/main/coffeescript/*.coffee'
+			tasks: ['coffee']
+
 	grunt.loadNpmTasks 'grunt-contrib-coffee'
+	grunt.loadNpmTasks 'grunt-contrib-watch'
 
 	grunt.registerTask 'default', ['coffee']
