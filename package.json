@@ -1,7 +1,10 @@
 {
   "name": "ColorDrop",
   "version": "0.0.1",
-  "repository": "https://github.com/jhungerford/ColorDrop",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/jhungerford/ColorDrop.git"
+  },
   "devDependencies": {
     "bower": "^1.3.12",
     "grunt": "^0.4.5",
