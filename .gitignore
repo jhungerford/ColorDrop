@@ -9,7 +9,7 @@ target/
 # Bower dependencies
 # Discussion here: http://addyosmani.com/blog/checking-in-front-end-dependencies/
 # Run 'bower init' to pull them down.
-bower_components/
+src/main/resources/web/bower_components/
 
 # Grunt dependencies
 node_modules/
