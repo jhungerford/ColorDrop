@@ -2,6 +2,10 @@
 .idea/
 *.iml
 
+# Compiled Output
+build/
+target/
+
 # Bower dependencies
 # Discussion here: http://addyosmani.com/blog/checking-in-front-end-dependencies/
 # Run 'bower init' to pull them down.
