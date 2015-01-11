@@ -1,0 +1,8 @@
+{
+  "name": "ColorDrop",
+  "version": "0.0.1",
+  "repository": "https://github.com/jhungerford/ColorDrop",
+  "devDependencies": {
+    "grunt": "^0.4.5"
+  }
+}
