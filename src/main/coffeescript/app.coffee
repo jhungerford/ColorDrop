@@ -27,6 +27,8 @@ define ['jQuery', 'phaser'], ($, Phaser) ->
 				ground.width = game.world.width
 				ground.body.immovable = true
 
+				ground.body.velocity.y = -150
+
 				cursors = game.input.keyboard.createCursorKeys()
 
 			update: ->
