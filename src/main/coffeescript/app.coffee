@@ -10,6 +10,17 @@ define ['jQuery', 'phaser'], ($, Phaser) ->
 
 		randomBetween = (start, end) -> Math.random() * (end - start) + start
 
+		# http://www.google.com/design/spec/style/color.html
+		colors =
+			background: 0xCFD8DC # blue gray 100
+			red: 0xEF9A9A # red 200
+			yellow: 0xFFF59D # yellow 200
+			blue: 0x90CAF9 # blue 200
+			green: 0xA5D6A7 # green 200
+			purple: 0xCE93D8 # purple 200
+
+
+
 		class Row
 			constructor: (platforms, y) ->
 				@leftSide = @createPlatform(platforms, y)
@@ -60,7 +71,7 @@ define ['jQuery', 'phaser'], ($, Phaser) ->
 				true
 
 			create: ->
-				game.stage.backgroundColor = 0xFFF0A5
+				game.stage.backgroundColor = colors.background
 				game.physics.startSystem(Phaser.Physics.ARCADE)
 
 				@player = new Player()
