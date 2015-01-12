@@ -5,21 +5,31 @@ define ['jQuery', 'phaser'], ($, Phaser) ->
 		NUM_PLATFORMS = 3
 
 		PLAYER_WIDTH = 23
-		PLAYER_X_SPEED = PLATFORM_SPEED
+		PLAYER_X_SPEED = 2*PLATFORM_SPEED
 		PLAYER_Y_SPEED = 3*PLATFORM_SPEED
 
 		randomBetween = (start, end) -> Math.random() * (end - start) + start
 
+		class Color
+			constructor: (@hex, @key, @file) ->
+
 		# http://www.google.com/design/spec/style/color.html
 		colors =
-			background: 0xCFD8DC # blue gray 100
-			red: 0xEF9A9A # red 200
-			yellow: 0xFFF59D # yellow 200
-			blue: 0x90CAF9 # blue 200
-			green: 0xA5D6A7 # green 200
-			purple: 0xCE93D8 # purple 200
+			background: new Color(0xCFD8DC, 'background', 'web/img/background.gif') # blue gray 100
+			platform: new Color(0x263238, 'platform', 'web/img/platform.gif') # blue gray 900
+			red: new Color(0xEF9A9A, 'red', 'web/img/red.gif') # red 200
+			yellow: new Color(0xFFF59D, 'yellow', 'web/img/yellow.gif') # yellow 200
+			blue: new Color(0x90CAF9, 'blue', 'web/img/blue.gif') # blue 200
+			green: new Color(0xA5D6A7, 'green', 'web/img/green.gif') # green 200
+			purple: new Color(0xCE93D8, 'purple', 'web/img/purple.gif') # purple 200
 
+		allColors = [
+			colors.background, colors.platform, colors.red, colors.yellow, colors.blue, colors.green, colors.purple
+		]
 
+		zoneColors = [
+			colors.red, colors.yellow, colors.blue, colors.green, colors.purple
+		]
 
 		class Row
 			constructor: (platforms, y) ->
@@ -30,6 +40,7 @@ define ['jQuery', 'phaser'], ($, Phaser) ->
 
 			createPlatform: (platforms, y) ->
 				platform = platforms.create(0, y, 'platform')
+				platform.height = 20
 				platform.body.immovable = true
 				platform.body.velocity.y = -1 * PLATFORM_SPEED
 				platform
@@ -67,11 +78,11 @@ define ['jQuery', 'phaser'], ($, Phaser) ->
 		class State
 			preload: ->
 				game.load.image('player_gray', 'web/img/player_gray.png')
-				game.load.image('platform', 'web/img/platform.png')
+				game.load.image(color.key, color.file) for color in allColors
 				true
 
 			create: ->
-				game.stage.backgroundColor = colors.background
+				game.stage.backgroundColor = colors.background.hex
 				game.physics.startSystem(Phaser.Physics.ARCADE)
 
 				@player = new Player()
